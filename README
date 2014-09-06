@@ -1,0 +1,8 @@
+CyberLife Labs JSON Command Line Tools
+--------------------------------------
+
+
+This package contains a collection of command-line tools for working with files containing JSON-formatted information. The following tools are included:
+
+	jcut -- Selects named properties from JSON objects
+	jgrep -- Matches JSON objects containing specified properties and values

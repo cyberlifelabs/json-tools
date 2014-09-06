@@ -1,0 +1,36 @@
+#!/usr/bin/python
+
+from argparse import ArgumentParser
+
+import json
+import sys
+
+
+properties = {}
+
+
+parser = ArgumentParser(description='Select property values from a JSON stream')
+parser.add_argument('-s', action='store_true', help='emit values as strings')
+parser.add_argument('property', help='property to select')
+
+args     = parser.parse_args()
+property = [x for x in args.property.split('/')]
+
+for line in sys.stdin:
+	line = line.strip()
+	
+	if line != '' and line[0] != '#':
+		d = json.loads(line)
+		
+		for element in property:
+			if element not in d:
+				d = None
+				break
+			
+			d = d[element]
+		
+		if d != None:
+			if args.s:
+				print d
+			else:
+				print json.dumps(d)
